@@ -2,7 +2,7 @@ mongodb-jndi-datasource
 =======================
 **A JNDI pooled datasource for MongoDB**
 
-Tested on Tomcat 6 but should work fine on other Java servers with some configuration changes (JDNI datasour declaration).
+Tested on Tomcat 6 but should work fine on other Java servers with some configuration changes (JDNI datasource declaration).
 
 v1.0 of this project is using MongoDB java client v2.12.2
 
