@@ -65,4 +65,6 @@ http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-java-driver/
 
 ##Troubleshooting datasource deployment:
 Datasource deployment can be troubleshooted by setting this logging level in your server:
+```
 org.mongodb.datasource.level = FINE
+```
