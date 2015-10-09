@@ -1,21 +1,21 @@
 package org.mongodb.datasource;
 
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.naming.Context;
 import javax.naming.Name;
 import javax.naming.Reference;
 import javax.naming.spi.ObjectFactory;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 
 /**
  * A MongoDB JDNI pooled datasource that can be used in a Java server

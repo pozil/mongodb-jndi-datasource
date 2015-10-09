@@ -4,7 +4,7 @@
 	<groupId>org.mongodb.datasource</groupId>
 	<artifactId>mongodb-jndi-datasource</artifactId>
 	<name>JNDI pooled datasource for MongoDB</name>
-	<version>2.0</version>
+	<version>3.0</version>
 	
 	<properties>
 		<mongo.client.version>3.0.0</mongo.client.version>
