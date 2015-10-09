@@ -31,8 +31,8 @@ public class MongoDatasourceConfiguration {
 	private Integer maxWaitTime	= null;
 
 	
-	public static MongoDatasourceConfiguration loadFromJNDIReference(Reference reference) throws Exception {
-		MongoDatasourceConfiguration config = new MongoDatasourceConfiguration();
+	public static MongoDatasourceConfiguration loadFromJNDIReference(final Reference reference) throws Exception {
+		final MongoDatasourceConfiguration config = new MongoDatasourceConfiguration();
 
 		// Server settings
 		
@@ -84,8 +84,8 @@ public class MongoDatasourceConfiguration {
 	 * @param datasourceName name of the datasource
 	 * @return MongoClientOptions initialized with datasource configuration
 	 */
-	public MongoClientOptions getMongoClientOptions(String datasourceName) {
-		MongoClientOptions.Builder optionBuilder = MongoClientOptions.builder();
+	public MongoClientOptions getMongoClientOptions(final String datasourceName) {
+		final MongoClientOptions.Builder optionBuilder = MongoClientOptions.builder();
 
 		// Set DS name
 		optionBuilder.description(datasourceName);
@@ -103,7 +103,7 @@ public class MongoDatasourceConfiguration {
 		return optionBuilder.build();
 	}
 
-	private static Integer getOptionalReferenceValueAsInteger(Reference reference, String key) throws Exception {
+	private static Integer getOptionalReferenceValueAsInteger(final Reference reference, final String key) throws Exception {
 		String stringValue = getReferenceValue(reference, key);
 		if (!isEmptyValue(stringValue)) {
 			try {
@@ -115,17 +115,17 @@ public class MongoDatasourceConfiguration {
 		return null;
 	}
 
-	private static String getReferenceValue(Reference reference, String key) {
+	private static String getReferenceValue(final Reference reference, final String key) {
 		RefAddr property = reference.get(key);
 		return property == null ? null : (String) property.getContent();
 	}
 
-	private static boolean isEmptyValue(String value) {
+	private static boolean isEmptyValue(final String value) {
 		return (value == null) || (value.trim().isEmpty());
 	}
 
 	public String toString() {
-		StringBuffer output = new StringBuffer("MongoDatasourceConfiguration {");
+		final StringBuffer output = new StringBuffer("MongoDatasourceConfiguration {");
 		// Server settings
 		output.append(PROP_HOST).append("=").append(this.host).append(", ");
 		output.append(PROP_PORT).append("=").append(this.port).append(", ");

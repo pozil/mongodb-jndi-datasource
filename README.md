@@ -4,7 +4,10 @@ mongodb-jndi-datasource
 
 Tested on Tomcat 6 but should work fine on other Java servers with some configuration changes (JDNI datasource declaration).
 
-v1.0 of this project is using MongoDB java client v2.12.2
+**Main changes**
+- v3.0 now returns 'com.mongodb.client.MongoDatabase' instead of 'com.mongodb.DB'
+- v2.0 uses MongoDB java client v3.0.0
+- v1.0 uses MongoDB java client v2.12.2
 
 ##Deploy instructions for Tomcat 6:
 These instructions explain how to bind the datasource (DS) to the Bonita web application.
@@ -18,7 +21,7 @@ These instructions explain how to bind the datasource (DS) to the Bonita web app
 ``` XML
 <Resource name="testMongodbDS"
 	auth="Container"
-	type="com.mongodb.DB"
+	type="com.mongodb.client.MongoDatabase"
 	factory="org.mongodb.datasource.MongoDatasourceFactory"
 	
 	host="localhost"
@@ -34,7 +37,7 @@ These instructions explain how to bind the datasource (DS) to the Bonita web app
 />
 ```
 
-**Note:** Remember update these settings to match your MongoDB settings.
+**Note:** Remember to update these settings to match your MongoDB settings.
 
 
 ##Usage instructions:
@@ -60,8 +63,7 @@ finally
 }
 ```
 
-Note that the returned DB object is the one from the official MongoDB driver:
-http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-java-driver/
+Note that the object returned from the datasource is a [com.mongodb.client.MongoDatabase](http://api.mongodb.org/java/3.0/com/mongodb/client/MongoDatabase.html)
 
 ##Troubleshooting datasource deployment:
 Datasource deployment can be troubleshooted by setting this logging level in your server:

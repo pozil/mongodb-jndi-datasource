@@ -1,7 +1,7 @@
 package org.mongodb.datasource;
 
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * Bean holding an open MongoClient used as a pooled datasource and its configuration
@@ -11,7 +11,7 @@ public class MongoDatasource {
 	private final MongoClient client;
 	private final MongoDatasourceConfiguration config;
 
-	protected MongoDatasource(MongoClient client, MongoDatasourceConfiguration config) {
+	protected MongoDatasource(final MongoClient client, final MongoDatasourceConfiguration config) {
 		this.client = client;
 		this.config = config;
 	}
@@ -20,8 +20,8 @@ public class MongoDatasource {
 	 * Retrieves a connection from this datasource
 	 * @return DB object representing a MongoDB connection
 	 */
-	public DB getConnection() {
-		return client.getDB(config.getDatabaseName());
+	public MongoDatabase getConnection() {
+		return client.getDatabase(config.getDatabaseName());
 	}
 
 	/**
