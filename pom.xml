@@ -4,16 +4,16 @@
 	<groupId>org.mongodb.datasource</groupId>
 	<artifactId>mongodb-jndi-datasource</artifactId>
 	<name>JNDI pooled datasource for MongoDB</name>
-	<version>1.0</version>
+	<version>2.0</version>
 	
 	<properties>
-		<mongo.client.version>2.12.2</mongo.client.version>
+		<mongo.client.version>3.0.0</mongo.client.version>
 	</properties>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
+			<artifactId>mongodb-driver</artifactId>
 			<version>${mongo.client.version}</version>
 		</dependency>
 	</dependencies>
@@ -25,8 +25,8 @@
 				<version>3.1</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>

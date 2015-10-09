@@ -64,20 +64,6 @@ public class MongoDatasourceFactory implements ObjectFactory {
 			} catch (Exception e) {
 				throw new Exception("Failed to load configuration: " + e.getMessage(), e);
 			}
-
-			// Test connection for first use
-			try {
-				final DB db = datasource.getConnection();
-				db.requestStart();
-				try {
-					db.requestEnsureConnection();
-					db.getCollectionNames();
-				} finally {
-					db.requestDone();
-				}
-			} catch (Exception e) {
-				throw new Exception("Initial connection test failed: " + e.getMessage(), e);
-			}
 			
 			// Add datasource to cache
 			datasources.put(dsName, datasource);
