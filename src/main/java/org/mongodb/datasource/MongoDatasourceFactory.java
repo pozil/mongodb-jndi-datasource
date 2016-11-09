@@ -116,18 +116,14 @@ public class MongoDatasourceFactory implements ObjectFactory {
 	}
 
 	private static MongoCredential createMongoCredentials(MongoDatasourceConfiguration config) throws Exception {
-		final String authMechanism = config.getAuthMechanism();
-		
 		MongoCredential mongoCredential = null;
-		
-		if ("MONGODB-CR".equalsIgnoreCase(authMechanism)){
-			mongoCredential = MongoCredential.createMongoCRCredential(config.getUsername(), config.getDatabaseName(), config.getPassword().toCharArray());
-		} else if ("SCRAM-SHA-1".equalsIgnoreCase(authMechanism)){
-			mongoCredential = MongoCredential.createScramSha1Credential(config.getUsername(), config.getDatabaseName(), config.getPassword().toCharArray());
-		}
-		
-		if( mongoCredential == null ){
-			throw new Exception("[Mongo Credential " + authMechanism + "] not supported.");
+		switch (config.getAuthMechanism()) {
+			case MONGODB_CR:
+				mongoCredential = MongoCredential.createMongoCRCredential(config.getUsername(), config.getDatabaseName(), config.getPassword().toCharArray());
+				break;
+			case SCRAM_SHA_1:
+				mongoCredential = MongoCredential.createScramSha1Credential(config.getUsername(), config.getDatabaseName(), config.getPassword().toCharArray());
+				break;
 		}
 		return mongoCredential;
 	}

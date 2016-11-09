@@ -9,6 +9,7 @@ public class MongoDatasourceConfiguration {
 	// Server constants
 	private static final String PROP_HOST = "host";
 	private static final String PROP_PORT = "port";
+	
 	// Authentication constants
 	private static final String PROP_DB_NAME	= "databaseName";
 	private static final String PROP_USERNAME	= "username";
@@ -27,7 +28,7 @@ public class MongoDatasourceConfiguration {
 	private String databaseName	= null;
 	private String username		= null;
 	private String password		= null;
-	private String authMechanism= null;
+	private MongoAuthenticationMechanism authMechanism = null;
 	// Pooling settings
 	private Integer minPoolSize	= null;
 	private Integer maxPoolSize	= null;
@@ -65,14 +66,18 @@ public class MongoDatasourceConfiguration {
 			throw new Exception("Missing password property: "+ PROP_PASSWORD);
 		
 		// Optional Authentication Mechanism
-		config.authMechanism = getReferenceValue(reference, PROP_AUTH_MECHANISM);
-		if(isEmptyValue(config.authMechanism) && !isEmptyValue(config.username) && !isEmptyValue(config.password)){			
-			config.authMechanism = "SCRAM-SHA-1";
+		String authMechanismString = getReferenceValue(reference, PROP_AUTH_MECHANISM);
+		if(isEmptyValue(authMechanismString) && !isEmptyValue(config.username) && !isEmptyValue(config.password)){			
+			config.authMechanism = MongoAuthenticationMechanism.SCRAM_SHA_1;
 		}
-		
-		if(!isEmptyValue(config.authMechanism) && (isEmptyValue(config.username) || isEmptyValue(config.password)) ){
+		else {
+			config.authMechanism = MongoAuthenticationMechanism.getFromValue(authMechanismString);
+		}
+		// Username and password are mandatory when authentication mechanism is set
+		if(config.authMechanism != null && (isEmptyValue(config.username) || isEmptyValue(config.password)) ){
 			throw new Exception("Missing value for mandatory property "+ PROP_USERNAME + " or " + PROP_PASSWORD);
 		}
+		
 		// Pooling settings
 		
 		// Optional minimum pool size
@@ -185,7 +190,7 @@ public class MongoDatasourceConfiguration {
 		return this.maxWaitTime;
 	}
 	
-	public String getAuthMechanism() {
+	public MongoAuthenticationMechanism getAuthMechanism() {
 		return authMechanism;
 	}
 }
