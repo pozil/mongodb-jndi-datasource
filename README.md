@@ -5,6 +5,7 @@ mongodb-jndi-datasource
 Tested on Tomcat 6 but should work fine on other Java servers with some configuration changes (JDNI datasource declaration).
 
 **Main changes**
+- v4.0 now is possible to choose the Authentication Mechanism (SCRAM-SHA-1 or MONGODB-CR). Default as SCRAM-SHA-1
 - v3.0 now returns `com.mongodb.client.MongoDatabase` instead of `com.mongodb.DB` (deprecated)
 - v2.0 uses MongoDB java client v3.0.0
 - v1.0 uses MongoDB java client v2.12.2
@@ -30,6 +31,7 @@ These instructions explain how to bind the datasource (DS) to the Bonita web app
 	databaseName="test"
 	username=""
 	password=""
+	authMechanism=""
 	
 	minPoolSize="10"
 	maxPoolSize="100"

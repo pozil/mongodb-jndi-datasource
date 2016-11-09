@@ -13,6 +13,8 @@ public class MongoDatasourceConfiguration {
 	private static final String PROP_DB_NAME	= "databaseName";
 	private static final String PROP_USERNAME	= "username";
 	private static final String PROP_PASSWORD	= "password";
+	private static final String PROP_AUTH_MECHANISM = "authMechanism";
+	
 	// Pooling constants
 	private static final String PROP_MIN_POOL_SIZE	= "minPoolSize";
 	private static final String PROP_MAX_POOL_SIZE	= "maxPoolSize";
@@ -25,6 +27,7 @@ public class MongoDatasourceConfiguration {
 	private String databaseName	= null;
 	private String username		= null;
 	private String password		= null;
+	private String authMechanism= null;
 	// Pooling settings
 	private Integer minPoolSize	= null;
 	private Integer maxPoolSize	= null;
@@ -61,6 +64,15 @@ public class MongoDatasourceConfiguration {
 		if ((!isEmptyValue(config.username)) && (isEmptyValue(config.password)))
 			throw new Exception("Missing password property: "+ PROP_PASSWORD);
 		
+		// Optional Authentication Mechanism
+		config.authMechanism = getReferenceValue(reference, PROP_AUTH_MECHANISM);
+		if(isEmptyValue(config.authMechanism) && !isEmptyValue(config.username) && !isEmptyValue(config.password)){			
+			config.authMechanism = "SCRAM-SHA-1";
+		}
+		
+		if(!isEmptyValue(config.authMechanism) && (isEmptyValue(config.username) || isEmptyValue(config.password)) ){
+			throw new Exception("Missing value for mandatory property "+ PROP_USERNAME + " or " + PROP_PASSWORD);
+		}
 		// Pooling settings
 		
 		// Optional minimum pool size
@@ -132,6 +144,7 @@ public class MongoDatasourceConfiguration {
 		// Authentication settings
 		output.append(PROP_DB_NAME).append("=").append(this.databaseName).append(", ");
 		output.append(PROP_USERNAME).append("=").append(this.username).append(", ");
+		output.append(PROP_AUTH_MECHANISM).append("=").append(this.authMechanism).append(",");
 		// Pooling settings
 		output.append(PROP_MIN_POOL_SIZE).append("=").append(this.minPoolSize).append(", ");
 		output.append(PROP_MAX_POOL_SIZE).append("=").append(this.maxPoolSize).append(", ");
@@ -170,5 +183,9 @@ public class MongoDatasourceConfiguration {
 
 	public Integer getMaxWaitTime() {
 		return this.maxWaitTime;
+	}
+	
+	public String getAuthMechanism() {
+		return authMechanism;
 	}
 }
