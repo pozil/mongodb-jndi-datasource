@@ -10,7 +10,7 @@ Tested on Tomcat 6 but should work fine on other Java servers with some configur
 - v2.0 uses MongoDB java client v3.0.0
 - v1.0 uses MongoDB java client v2.12.2
 
-##Deploy instructions for Tomcat 6:
+## Deploy instructions for Tomcat 6
 These instructions explain how to bind the datasource (DS) to the Bonita web application.
 
 1. Obtain the Mongo DB client JAR file from here (make sure the version match with the project, see above): http://docs.mongodb.org/ecosystem/drivers/java/ 
@@ -42,7 +42,7 @@ These instructions explain how to bind the datasource (DS) to the Bonita web app
 **Note:** Remember to update these settings to match your MongoDB settings.
 
 
-##Usage instructions:
+## Usage instructions
 Once you have deployed the datasource on your server, you may call it with the following Java code:
 
 ``` Java
@@ -55,7 +55,7 @@ db.getCollectionNames();
 
 Note that the object returned from the datasource is a [com.mongodb.client.MongoDatabase](http://api.mongodb.org/java/3.0/com/mongodb/client/MongoDatabase.html)
 
-##Troubleshooting datasource deployment:
+## Troubleshooting datasource deployment
 Datasource deployment can be troubleshooted by setting this logging level in your server:
 ```
 org.mongodb.datasource.level = FINE
